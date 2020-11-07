@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WED. A Web Editor</title>
 
+    <!-- WeD Page Css -->
     <style type="text/css">
       /* 
         wed- prefix to avoid conflicts with user css
@@ -13,13 +14,16 @@
         box-sizing: border-box;
       }
 
-       .wed-grid {
-        border:dotted rgb(29, 109, 96) 1px;
+      body {
+          background: #333;
+      }
+
+       .wed-grid {        
         display: grid;
         grid-template-columns: 1fr 0.25fr;
-        grid-template-rows: 3fr 2fr auto 2fr; 
+        grid-template-rows: 3fr 3fr auto 0.8fr; 
         grid-gap: 4px 10px;
-        height: 800px;
+        height: 800px;        
        }
 
         .wed-col1+div {
@@ -58,15 +62,23 @@
 
         .wed-consoleOutput{
           grid-row:4;
-          border: solid 1px grey;
+          border: solid 1px grey;          
         }
 
         .wed-templates {
           grid-column: 2;
-          grid-row: 1/5;
-          background-color:rgb(248, 245, 245);
-          justify-content: center;
-          align-items: center;
+          grid-row: 1/5;          
+          border:solid rgba(0, 0, 0, 0.164) 1px;
+          background-color: #333;
+        }
+
+        .wed-templates > h4 {
+           background-color: black;     
+           color:azure;
+           text-align: center;
+           font: 1em sans-serif;
+           padding: 10px 0;
+           margin: 0;
         }
 
         .wed-grid-centering {
@@ -77,6 +89,8 @@
         .wed-editor TextArea, .wed-consoleOutput TextArea {
             height:100%;
             width:100%;
+            background: #222;
+            color:whitesmoke;
         }
 
         .wed-editor TextArea {
@@ -86,24 +100,31 @@
 
     </style>  
 
-     <style class="wed-previewCss"></style>
+    <!-- Where user's css are written -->
+    <style class="wed-previewCss"></style>
 </head>
 <body>
 
+<!-- PAGE STRUCTURE
++------------------+    +------------------+  
++     PREVIEW      +    +     TEMPLATES    +  
++------------------+    .                  .  
++------------------+  
++  Editable code   +  
++------------------+  
+[Render] [Reset]    
++------------------+  
++  console output  +    .                  .  
++------------------+    +------------------+          
+-->
 <div class="wed-grid">
   
-    <div class="wed-preview">result</div>
-  
-  <div class="wed-commands"> 
-      <button>Render</button>  
-      <button>Reset</button>  
-  </div>
+  <div class="wed-preview">result</div>  
 
   <div class="wed-editors">
 
       <div class="wed-editor htmlEditor">
-          <textarea id="textareaHtml">
-<div class="grid">
+          <textarea id="textareaHtml"><div class="grid">
     <div class="item">
         <div class="subitem"></div>
     </div>
@@ -140,9 +161,14 @@
 
   </div>
   
-  <div class="wed-consoleOutput">
-    <textarea id="textareConsole" readonly>console output</textarea>   
-  </div>
+  
+    <div class="wed-commands">       
+      <button onclick="textareaHtml.value=''; textareaCss.value=''; changeDetected();">Reset</button>  
+    </div>
+
+    <div class="wed-consoleOutput">
+        <textarea id="textareConsole" readonly>console output</textarea>   
+    </div>
 
   <div class="wed-templates wed-grid-centering"> 
       <h4>Templates</h4>      
@@ -150,48 +176,33 @@
 
 </div>       
     
+
 <script>
     
+    // Previews elements
     var previewCss = document.querySelector('.wed-previewCss');
     var previewHtml = document.querySelector('.wed-preview');
+    // Input elements
     var textareaHtml = document.querySelector('#textareaHtml');
     var textareaCss = document.querySelector('#textareaCss');
         
-    // Refresh when the user update html or css
-    textareaHtml.addEventListener('input', userChange);
-    textareaCss.addEventListener('input', userChange);
+    // Detect input change: user has updated html or css
+    textareaHtml.addEventListener('input', changeDetected);
+    textareaCss.addEventListener('input', changeDetected);
 
-    function userChange() {
+    function changeDetected() {
         htmlCode = textareaHtml.value;
         cssCode = textareaCss.value;
-        render(cssCode, htmlCode);
+        preview(cssCode, htmlCode);
     }
 
-    function render(cssCode, htmlCode) {        
+    function preview(cssCode, htmlCode) {        
         previewCss.innerHTML = cssCode;
-        previewHtml.innerHTML = htmlCode;
+        previewHtml.innerHTML = htmlCode;        
     }
-    window.addEventListener('load', userChange);
-
-    // event delegation    
-    document.addEventListener("click", function(event) {
-    if (! event.target.matches("button")) 
-        return;
     
-    switch(event.value)
-    {
-        case 'Render':
-            userChange();
-        break;
-
-        case 'Reset':
-            let htmlCode = textareaHtml.value;
-            let cssCode = textareaCss.value;
-            render(cssCode, htmlCode);
-        break;
-    }    
-});    
-
+    // Init
+    window.addEventListener('load', changeDetected);
 </script>    
     
 </body>
