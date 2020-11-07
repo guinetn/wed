@@ -128,6 +128,7 @@
     <div class="item">
         <div class="subitem"></div>
     </div>
+    <script>console.log("Catch console.log ! " + Date.now())</script>
 </div>
           </textarea>   
        </div>
@@ -163,11 +164,12 @@
   
   
     <div class="wed-commands">       
-      <button onclick="textareaHtml.value=''; textareaCss.value=''; changeDetected();">Reset</button>  
+      <button onclick="textareaHtml.value=''; textareaCss.value=''; changeDetected()">Reset Codes</button>  
+      <button onclick="previewConsole.innerHTML=''">Reset Console</button>  
     </div>
 
     <div class="wed-consoleOutput">
-        <textarea id="textareConsole" readonly>console output</textarea>   
+        <textarea id="textareConsole" readonly></textarea>   
     </div>
 
   <div class="wed-templates wed-grid-centering"> 
@@ -177,11 +179,14 @@
 </div>       
     
 
+<script id="previewJS"></script>
+
 <script>
     
     // Previews elements
     var previewCss = document.querySelector('.wed-previewCss');
     var previewHtml = document.querySelector('.wed-preview');
+    var previewConsole = document.querySelector('#textareConsole');
     // Input elements
     var textareaHtml = document.querySelector('#textareaHtml');
     var textareaCss = document.querySelector('#textareaCss');
@@ -198,11 +203,31 @@
 
     function preview(cssCode, htmlCode) {        
         previewCss.innerHTML = cssCode;
-        previewHtml.innerHTML = htmlCode;        
+        setInnerHTML(previewHtml, htmlCode);               
     }
     
     // Init
     window.addEventListener('load', changeDetected);
+
+    // Eval any <script> in innerHTML
+    function setInnerHTML(ele, html)  
+    {          
+        ele.innerHTML = html;  
+        var codes = ele.getElementsByTagName("script");   
+        for(var i=0;i<codes.length;i++)          
+            eval(codes[i].text);          
+    }  
+
+    // Console.log() Hook. Extends if needed for warn/error…    
+    (function(){
+		console.defaultLog = console.log.bind(console);		
+		console.log = function() {
+	    	console.defaultLog.apply(console, arguments);  	
+
+	    	previewConsole.innerHTML += Array.from(arguments)[0] + '\n';    
+	}})();
+
+    
 </script>    
     
 </body>
