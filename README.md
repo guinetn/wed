@@ -5,17 +5,18 @@ A web editor sided with editable samples
 
 # V 0.0.1 - A SINGLE PAGE 
  
+ <code>
 +------------------+    +------------------+  
-+  Editable code   +    +     TEMPLATES    +  
++   Render zone    +    +     TEMPLATES    +  
 +------------------+    .                  .  
-[Render]  
 +------------------+  
-+   Render zone    +  
++  Editable code   +  
 +------------------+  
-  
+[Render]    
 +------------------+  
 +  console output  +    .                  .  
 +------------------+    +------------------+  
+</code>
 
 ☐ Html/css/js Editor   
 ☐ Click [Render] → Editor content is rendered as html in render zone  
@@ -33,9 +34,15 @@ If the render zone make some "console.log()", catch them in the console output
     - a gulp task or powershell script compile these files to a json object rendered as a clickable list in the templates zone  
 ☐ Click on a template → its code is added to editable zone  
    
-# V 0.0.3 - Use "Code mirror" editor?
+# V 0.0.4 - 
 
-# V 0.1.0 -  Add Tabs
+☐ Local storage for retrieve last modified app state at re-open
+
+# V 0.1.0 - Use "Code mirror" editor?
+
+☐ Better editor
+
+# V 0.1.1 -  Add Tabs
  ___  ___   
 /   \/   \                    ← Tabs   
 +------------------+    +------------------+  
