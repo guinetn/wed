@@ -1,11 +1,13 @@
 # wed
 A web editor sided with editable samples
 
+![](web.png)
+
 # ROADMAP
 
 # V 0.0.1 - A SINGLE PAGE 
  
- <code>
+<pre> <code>
 +------------------+    +------------------+  
 +   Render zone    +    +     TEMPLATES    +  
 +------------------+    .                  .  
@@ -16,7 +18,7 @@ A web editor sided with editable samples
 +------------------+  
 +  console output  +    .                  .  
 +------------------+    +------------------+  
-</code>
+</code><pre>
 
 ☐ Html/css/js Editor   
 ☐ Click [Render] → Editor content is rendered as html in render zone  
