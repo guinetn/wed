@@ -4,42 +4,93 @@ const config = {
     templatesDirectory: "templates"
 }
 
-// Previews elements
+// Preview elements
 var previewCss = document.querySelector('.wed-previewCss');
 var previewHtml = document.querySelector('.wed-preview');
 var previewConsole = document.querySelector('#textareConsole');
 // Input elements
 var textareaHtml = document.querySelector('#textareaHtml');
-var textareaCss = document.querySelector('#textareaCss');
-    
+var textareaCss = document.querySelector('#textareaCss');    
 // Detect input change: user has updated html or css
-textareaHtml.addEventListener('input', changeDetected);
-textareaCss.addEventListener('input', changeDetected);
+textareaHtml.addEventListener('input', update);
+textareaCss.addEventListener('input', update);
 
-function changeDetected() {
-    const htmlCode = textareaHtml.value;
-    const cssCode = textareaCss.value;
-    preview(cssCode, htmlCode);
-}
+// Templates
+templatesList.addEventListener("click", templateSelected);
 
-function preview(cssCode, htmlCode) {        
-    previewCss.innerHTML = cssCode;
-    setInnerHTML(previewHtml, htmlCode);               
-}
+// Search in Templates
+document.querySelector("#wed-search").addEventListener("change", templatesLib.filterTemplates); // Paste
+document.querySelector("#wed-search").addEventListener("keyup", templatesLib.filterTemplates);  // Key pressed
+
+// Commands
+document.querySelector('#clearCodes').addEventListener('click', clearCodes);
+document.querySelector("#clearConsole").addEventListener("click", clearConsole);
 
 // Init
 window.addEventListener('load', init);
 
 function init() {
-    const initialCss = ".grid {\n    display: grid;\n    grid-template-columns: repeat(9, 1fr);\n    grid-template-rows: repeat(4, minmax(100px, auto));\n    background-color: #fff4e6;  \n}\n\n.item {\n    display: grid;\n    grid-column: 2 / 7;\n    grid-row: 2 / 4;\n    grid-template-columns: repeat(3, 1fr);\n    grid-template-rows: subgrid;\n    background-color: #ffd8a8;\n    border: 2px solid #ffa94d;\n}\n\n.subitem {\n    grid-column: 2 / 4;\n    grid-row: 1 / 3;\n    background-color: rgb(40, 240, 83);\n    border: 2px solid #00a94d;\n}\n";
-    const initialHtml = '<div class="grid">\n  <div class="item">\n    <div class="subitem"></div>\n  </div>\n</div>\n<script>console.log("Catch console.log ! ")<\/script>\n'
-    textareaCss.value = initialCss;
-    textareaHtml.value = initialHtml;
-    changeDetected();
-    templatesLib.initializeTemplates();
+  
+  templatesLib.initializeTemplates();
+  
+  const initialCss =
+    ".grid {\n    display: grid;\n    grid-template-columns: repeat(9, 1fr);\n    grid-template-rows: repeat(4, minmax(100px, auto));\n    background-color: #fff4e6;  \n}\n\n.item {\n    display: grid;\n    grid-column: 2 / 7;\n    grid-row: 2 / 4;\n    grid-template-columns: repeat(3, 1fr);\n    grid-template-rows: subgrid;\n    background-color: #ffd8a8;\n    border: 2px solid #ffa94d;\n}\n\n.subitem {\n    grid-column: 2 / 4;\n    grid-row: 1 / 3;\n    background-color: rgb(40, 240, 83);\n    border: 2px solid #00a94d;\n}\n";
+  const initialHtml =
+    '<div class="grid">\n  <div class="item">\n    <div class="subitem"></div>\n  </div>\n</div>\n<script>console.log("Catch console.log ! ")</script>\n';
+  textareaCss.value = initialCss;
+  textareaHtml.value = initialHtml;
+  update();
 }
 
-templatesList.addEventListener("click", templateSelected);
+
+
+
+// Commands
+
+function clearCodes() {
+  textareaHtml.value = "";
+  textareaCss.value = "";
+  update();          
+}
+
+function clearConsole() {
+  previewConsole.innerHTML = "";
+}
+
+// Preview
+
+function update() { 
+    const htmlCode = textareaHtml.value;
+    const cssCode = textareaCss.value;
+    setPreview(cssCode, htmlCode);
+}
+
+function setPreview(cssCode, htmlCode) {
+  previewCss.innerHTML = cssCode;
+  setInnerHTML(previewHtml, htmlCode);
+}
+
+// Render html & eval <script> (Welcome Xss attacks, but you're on commands ;) See an original xss punishment at https://fdossena.com/?p=xsspunish/i.md)
+function setInnerHTML(element, html)  
+{          
+    element.innerHTML = html;  
+    var codes = element.getElementsByTagName("script");   
+    for(var i=0;i<codes.length;i++)          
+        eval(codes[i].text);          
+}  
+
+// Console Hook (for display purpose). Extend if needed for warn/error…    
+(function(){
+    console.defaultLog = console.log.bind(console);		
+    console.log = function() {
+        console.defaultLog.apply(console, arguments);  	
+        previewConsole.innerHTML += Array.from(arguments)[0] + '\n';    
+    }
+ })();
+
+
+
+// Templates
 
 function templateSelected(event) {
     
@@ -55,12 +106,6 @@ function templateSelected(event) {
         templatesLib.getTemplateFiles(config.templatesDirectory, files, applyTemplate);          
     }
 }    
-
-document.getElementById("search")
-        .addEventListener("change", templatesLib.filterTemplates);
-document.getElementById("search")
-  .addEventListener("keyup", templatesLib.filterTemplates);
-
 
   function applyTemplate(file, result) {
     if (file == null) {
@@ -84,28 +129,5 @@ document.getElementById("search")
       }
     }
 
-    changeDetected();
+    update();
   }
-
-
-
-
-// Eval any <script> in html
-function setInnerHTML(ele, html)  
-{          
-    ele.innerHTML = html;  
-    var codes = ele.getElementsByTagName("script");   
-    for(var i=0;i<codes.length;i++)          
-        eval(codes[i].text);          
-}  
-
-// Console Hook. Extend if needed for warn/error…    
-(function(){
-    console.defaultLog = console.log.bind(console);		
-    console.log = function() {
-        console.defaultLog.apply(console, arguments);  	
-        previewConsole.innerHTML += Array.from(arguments)[0] + '\n';    
-    }
- })();
-
-

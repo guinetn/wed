@@ -7,65 +7,50 @@
 
     <!-- WeD Page Css -->
     <link rel="stylesheet" href="index.css">
+
+    <!-- This is how app's works: css & html are injected here. That's all  -->  
     <!-- Where user's css are injected -->
     <style class="wed-previewCss"></style>
-    
+    <!-- Where user's js code is injected -->
+    <script id="previewJS"></script>
+
 </head>
 <body class="wed-body">
 
-<!-- PAGE STRUCTURE
-+------------------+    +------------------+  
-+     PREVIEW      +    +     TEMPLATES    +  
-+------------------+    .                  .  
-+------------------+  
-+  Editable code   +  
-+------------------+  
-[Render] [Reset]    
-+------------------+  
-+  console output  +    .                  .  
-+------------------+    +------------------+          
--->
-<div class="wed-grid">
-  
-  <div class="wed-preview">result</div>  
+  <div class="wed-grid">
+    
+    <div class="wed-preview"></div>  
 
-  <div class="wed-editors">
+    <div class="wed-editors">
 
-      <div class="wed-editor htmlEditor">
-          <textarea id="textareaHtml"></textarea>   
-       </div>
+        <div class="wed-editor htmlEditor">
+            <textarea id="textareaHtml"></textarea>   
+        </div>
 
-       <div class="wed-editor cssEditor">
-          <textarea id="textareaCss"></textarea>   
-       </div>
+        <div class="wed-editor cssEditor">
+            <textarea id="textareaCss"></textarea>   
+        </div>
 
-  </div>
-  
-  
+    </div>
+       
     <div class="wed-commands">       
-      <button onclick="textareaHtml.value=''; textareaCss.value=''; changeDetected()">Reset Codes</button>  
-      <button onclick="previewConsole.innerHTML=''">Reset Console</button>  
+      <button id="clearCodes">Clear Codes</button>  
+      <button id="clearConsole">Clear Console</button>  
     </div>
 
     <div class="wed-consoleOutput">
         <textarea id="textareConsole" readonly></textarea>   
     </div>
 
-  <div class="wed-templates wed-grid-centering"> 
-      <h4>Templates</h4>      
-      <input type="text" id="search" placeholder="Search">
-      <ul id="templatesList">       
-      </ul>
-  </div>
+    <div class="wed-templates"> 
+        <h4>Templates</h4>      
+        <input type="text" id="wed-search" placeholder="Search">
+        <ul id="templatesList"></ul>
+    </div>
 
-</div>       
+  </div>       
 
-<!-- Where user js code is injected -->
-<script id="previewJS"></script>
-
-<script type="module" src="js/index.js"></script>    
+  <script type="module" src="js/index.js"></script>    
     
 </body>
 </html>
-
-

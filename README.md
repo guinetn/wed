@@ -1,12 +1,14 @@
 # wed
-A web editor sided with editable samples
+A web editor sided with editable samples for training
 
-![](wed.png)
+* Html/css/js Editor   
+* Real time modifications rendering
+* Console outputs catched and displayed
+* Templates injection by simple click      
+* Local storage to restore application state 
 
-# ROADMAP
+![Wed screenshoot](wed.png)
 
-# V 0.0.1 - A SINGLE PAGE 
- 
 <pre> <code>
 +------------------+    +------------------+  
 +   Render zone    +    +     TEMPLATES    +  
@@ -14,51 +16,20 @@ A web editor sided with editable samples
 +------------------+  
 +  Editable code   +  
 +------------------+  
-[Render]    
+[Commands]    
 +------------------+  
 +  console output  +    .                  .  
 +------------------+    +------------------+  
 </code></pre>
 
-☐ Html/css/js Editor   
-☐ Click [Render] → Editor content is rendered as html in render zone  
+# Templates
 
-# V 0.0.2 - Add console outputs
+Defined in ***js\templates_list.js***  
+Can be  
+* a simple snippet (no server is required)
+* an html and/or css page (then a server is required. LiveServer in vscode is enough)
 
-If the render zone make some "console.log()", catch them in the console output  
+# Development tools
 
-# V 0.0.3 - Add some templates 
- 
-☐ Templates are  
-    - independant js/html/css snippets or complete html page  
-    - grouped in a json object that will be rendered as <list><a> in the "Templates" zone  
-    - original files are in "assets/templates"  
-    - a gulp task or powershell script compile these files to a json object rendered as a clickable list in the templates zone  
-☐ Click on a template → its code is added to editable zone  
-   
-# V 0.0.4 - 
+* VSCode [ + LiveServer ]
 
-☐ Local storage for retrieve last modified app state at re-open
-
-# V 0.1.0 - Use "Code mirror" editor?
-
-☐ Better editor
-
-# V 0.1.1 -  Add Tabs
- ___  ___   
-/   \/   \                    ← Tabs   
-+------------------+    +------------------+  
-+  Editable code   +    +     TEMPLATES    +  
-+------------------+    .                  .  
-  
-+------------------+  
-+   Render zone    +  
-+------------------+  
-  
-+------------------+  
-+  console output  +    .                  .  
-+------------------+    +------------------+  
-
-# Tools
-
-* VSCode: LiveServer
