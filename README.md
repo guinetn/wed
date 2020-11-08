@@ -56,3 +56,7 @@ If the render zone make some "console.log()", catch them in the console output
 +------------------+  
 +  console output  +    .                  .  
 +------------------+    +------------------+  
+
+# Tools
+
+* VSCode: LiveServer
