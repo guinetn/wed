@@ -1,7 +1,9 @@
 import * as templatesLib from "./templates.js";
 
 const config = {
-    templatesDirectory: "templates"
+    templatesDirectory: "templates",
+    initialCss: ".grid {\n    display: grid;\n    grid-template-columns: repeat(9, 1fr);\n    grid-template-rows: repeat(4, minmax(100px, auto));\n    background-color: #fff4e6;  \n}\n\n.item {\n    display: grid;\n    grid-column: 2 / 7;\n    grid-row: 2 / 4;\n    grid-template-columns: repeat(3, 1fr);\n    grid-template-rows: subgrid;\n    background-color: #ffd8a8;\n    border: 2px solid #ffa94d;\n}\n\n.subitem {\n    grid-column: 2 / 4;\n    grid-row: 1 / 3;\n    background-color: rgb(40, 240, 83);\n    border: 2px solid #00a94d;\n}\n",
+    initialHtml: '<div class="grid">\n  <div class="item">\n    <div class="subitem"></div>\n  </div>\n</div>\n<script>console.log("Catch console.log ! ")</script>\n'
 }
 
 // Preview elements
@@ -32,13 +34,7 @@ window.addEventListener('load', init);
 function init() {
   
   templatesLib.initializeTemplates();
-  
-  const initialCss =
-    ".grid {\n    display: grid;\n    grid-template-columns: repeat(9, 1fr);\n    grid-template-rows: repeat(4, minmax(100px, auto));\n    background-color: #fff4e6;  \n}\n\n.item {\n    display: grid;\n    grid-column: 2 / 7;\n    grid-row: 2 / 4;\n    grid-template-columns: repeat(3, 1fr);\n    grid-template-rows: subgrid;\n    background-color: #ffd8a8;\n    border: 2px solid #ffa94d;\n}\n\n.subitem {\n    grid-column: 2 / 4;\n    grid-row: 1 / 3;\n    background-color: rgb(40, 240, 83);\n    border: 2px solid #00a94d;\n}\n";
-  const initialHtml =
-    '<div class="grid">\n  <div class="item">\n    <div class="subitem"></div>\n  </div>\n</div>\n<script>console.log("Catch console.log ! ")</script>\n';
-  textareaCss.value = initialCss;
-  textareaHtml.value = initialHtml;
+  loadFromLocalStorage();
   update();
 }
 
@@ -60,9 +56,10 @@ function clearConsole() {
 // Preview
 
 function update() { 
-    const htmlCode = textareaHtml.value;
-    const cssCode = textareaCss.value;
-    setPreview(cssCode, htmlCode);
+    const css = textareaCss.value;
+    const html = textareaHtml.value;
+    setPreview(css, html);
+    saveToLocalStorage(css, html);
 }
 
 function setPreview(cssCode, htmlCode) {
@@ -131,3 +128,18 @@ function templateSelected(event) {
 
     update();
   }
+
+
+  // Storage
+
+  var saveToLocalStorage = function (css, html) {        
+    localStorage.setItem("user-css", css);    
+    localStorage.setItem("user-html", html);    
+  };
+
+  function loadFromLocalStorage() {
+    var userCss = localStorage.getItem("user-css");            
+    var userHtml = localStorage.getItem("user-html");            
+    textareaCss.value = userCss != null ? userCss : config.initialCss;    
+    textareaHtml.value = userHtml != null ? userHtml : config.initialHtml;        
+  };
