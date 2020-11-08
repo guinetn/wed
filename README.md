@@ -1,7 +1,7 @@
 # wed
 A web editor sided with editable samples
 
-![](web.png)
+![](wed.png)
 
 # ROADMAP
 
@@ -18,7 +18,7 @@ A web editor sided with editable samples
 +------------------+  
 +  console output  +    .                  .  
 +------------------+    +------------------+  
-</code><pre>
+</code></pre>
 
 ☐ Html/css/js Editor   
 ☐ Click [Render] → Editor content is rendered as html in render zone  
