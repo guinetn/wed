@@ -35,7 +35,7 @@ Can be
 * CodeMirror
 
 ## Start
-> Open index.html
-> Click on status bar "Go live" or
-> On index.html, right-click → Open with [LiveServer](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+> Open index.html  
+> Click on status bar "Go live" or  
+> On index.html, right-click → Open with [LiveServer](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)  
 
