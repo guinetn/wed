@@ -1,5 +1,9 @@
 import * as templatesLib from "./templates.js";
 
+// Code mirror
+let cmHtml = undefined;
+let cmCss = undefined;
+
 const config = {
     templatesDirectory: "templates",
     initialCss: ".grid {\n    display: grid;\n    grid-template-columns: repeat(9, 1fr);\n    grid-template-rows: repeat(4, minmax(100px, auto));\n    background-color: #fff4e6;  \n}\n\n.item {\n    display: grid;\n    grid-column: 2 / 7;\n    grid-row: 2 / 4;\n    grid-template-columns: repeat(3, 1fr);\n    grid-template-rows: subgrid;\n    background-color: #ffd8a8;\n    border: 2px solid #ffa94d;\n}\n\n.subitem {\n    grid-column: 2 / 4;\n    grid-row: 1 / 3;\n    background-color: rgb(40, 240, 83);\n    border: 2px solid #00a94d;\n}\n",
@@ -10,12 +14,6 @@ const config = {
 var previewCss = document.querySelector('.wed-previewCss');
 var previewHtml = document.querySelector('.wed-preview');
 var previewConsole = document.querySelector('#textareConsole');
-// Input elements
-var textareaHtml = document.querySelector('#textareaHtml');
-var textareaCss = document.querySelector('#textareaCss');    
-// Detect input change: user has updated html or css
-textareaHtml.addEventListener('input', update);
-textareaCss.addEventListener('input', update);
 
 // Templates
 templatesList.addEventListener("click", templateSelected);
@@ -31,22 +29,43 @@ document.querySelector("#clearConsole").addEventListener("click", clearConsole);
 // Init
 window.addEventListener('load', init);
 
-function init() {
-  
+function init() {  
   templatesLib.initializeTemplates();
-  loadFromLocalStorage();
-  update();
+  initEditors();
+  getLocalStorage();
 }
 
+function initEditors() {
+  
+  cmHtml = new CodeMirror.fromTextArea(document.getElementById("textareaHtml"),
+    {
+      lineNumbers: true,
+      mode: "javascript",
+      theme: "monokai",
+      lineWrapping: true,
+    }
+  );
+
+  cmCss = new CodeMirror.fromTextArea(document.getElementById("textareaCss"), {
+    lineNumbers: true,
+    mode: "css",
+    theme: "monokai",
+    lineWrapping: true,
+  });
+
+  cmHtml.setSize(600, 300);
+  cmCss.setSize(600, 300);
+
+  cmHtml.on("changes", () => update());
+  cmCss.on("changes", () => update());
+}
 
 
 
 // Commands
 
 function clearCodes() {
-  textareaHtml.value = "";
-  textareaCss.value = "";
-  update();          
+  setEditors();      
 }
 
 function clearConsole() {
@@ -56,10 +75,10 @@ function clearConsole() {
 // Preview
 
 function update() { 
-    const css = textareaCss.value;
-    const html = textareaHtml.value;
+    const css = cmCss.getValue(); 
+    const html = cmHtml.getValue(); 
     setPreview(css, html);
-    saveToLocalStorage(css, html);
+    setLocalStorage(css, html);
 }
 
 function setPreview(cssCode, htmlCode) {
@@ -106,8 +125,8 @@ function templateSelected(event) {
 
   function applyTemplate(file, result) {
     if (file == null) {
-      textareaCss.value = "";
-      textareaHtml.value = result;
+      cmCss.setValue("");  
+      cmHtml.setValue(result);      
     } else {
       const ext = file.split(".");
 
@@ -118,28 +137,32 @@ function templateSelected(event) {
 
       switch (ext[1]) {
         case "css":
-          textareaCss.value = result;
+          cmCss.setValue(result);
           break;
         case "html":
-          textareaHtml.value = result;
+          cmHtml.setValue(result);
           break;
       }
     }
-
-    update();
   }
 
 
   // Storage
 
-  var saveToLocalStorage = function (css, html) {        
+  var setLocalStorage = function (css, html) {        
     localStorage.setItem("user-css", css);    
     localStorage.setItem("user-html", html);    
   };
 
-  function loadFromLocalStorage() {
+  function getLocalStorage() {
     var userCss = localStorage.getItem("user-css");            
     var userHtml = localStorage.getItem("user-html");            
-    textareaCss.value = userCss != null ? userCss : config.initialCss;    
-    textareaHtml.value = userHtml != null ? userHtml : config.initialHtml;        
+    setEditors(
+      userCss != null ? userCss : config.initialCss,    
+      userHtml != null ? userHtml : config.initialHtml);        
   };
+
+  function setEditors(css="", html="") {
+     cmCss.setValue(css);
+     cmHtml.setValue(html);        
+  }
