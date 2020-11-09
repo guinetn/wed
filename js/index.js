@@ -98,10 +98,10 @@ function setInnerHTML(element, html)
 // Console Hook (for display purpose). Extend if needed for warn/error…    
 (function(){
     console.defaultLog = console.log.bind(console);		
-    console.log = function() {
-        console.defaultLog.apply(console, arguments);  	
-        previewConsole.innerHTML += Array.from(arguments)[0] + '\n';    
-    }
+    console.log = function () {
+      console.defaultLog.apply(console, arguments);
+      previewConsole.innerHTML = Array.from(arguments)[0] + "\n" + previewConsole.innerHTML; // last logs are at top
+    };
  })();
 
 
