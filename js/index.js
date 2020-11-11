@@ -6,8 +6,8 @@ let cmCss = undefined;
 
 const config = {
     templatesDirectory: "templates",
-    initialCss: ".grid {\n    display: grid;\n    grid-template-columns: repeat(9, 1fr);\n    grid-template-rows: repeat(4, minmax(100px, auto));\n    background-color: #fff4e6;  \n}\n\n.item {\n    display: grid;\n    grid-column: 2 / 7;\n    grid-row: 2 / 4;\n    grid-template-columns: repeat(3, 1fr);\n    grid-template-rows: subgrid;\n    background-color: #ffd8a8;\n    border: 2px solid #ffa94d;\n}\n\n.subitem {\n    grid-column: 2 / 4;\n    grid-row: 1 / 3;\n    background-color: rgb(40, 240, 83);\n    border: 2px solid #00a94d;\n}\n",
-    initialHtml: '<div class="grid">\n  <div class="item">\n    <div class="subitem"></div>\n  </div>\n</div>\n<script>console.log("Catch console.log ! ")</script>\n'
+    initialCss: "body {\n  margin: 40px;\n}\n.wrapper {\n	display: grid;\n    grid-gap: 10px;\n	grid-template-columns: 100px 100px 100px;\n	background-color: #fff;\n	color: #444;\n}\n.box {\n	background-color: #444;\n	color: #fff;\n	border-radius: 5px;\n	padding: 20px;\n	font-size: 150%;\n}\n.a {\n	grid-column: 1/3;\n}\n.b {\n	grid-column: 3 ;\n	grid-row: 1/ span 2;\n}\n.c {\n	grid-column: 1 ;\n	grid-row: 2 ;\n}\n.d {\n	grid-column: 2 ;\n	grid-row: 2 ;\n}",
+    initialHtml: '<div class="wrapper">\n  <div class="box a">A</div>\n  <div class="box b">B</div>\n  <div class="box c">C</div>\n  <div class="box d">D</div>\n</div>\n<script>console.log("Catch console.log ! ")</script>\n'
 }
 
 // Preview elements
