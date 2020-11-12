@@ -1,22 +1,21 @@
 # wed
-A web editor sided with editable samples for training
+A web editor sided with editable samples for training/prototyping: <https://guinetn.github.io/wed> 
 
 ## Features
-* Html/css/js Editor   
-* Real time modifications rendering
+* Html/css/js editor   
+* Realtime modifications rendering
 * Console outputs catched and displayed
 * Templates injection by simple click      
 * Local storage to restore application state 
 
-## Start
+## Running Locally
+>Open index.html  
 
-- ***Try it online***: https://guinetn.github.io/wed  
+Complexe templates (are html & css files) require a server  
+- Ex: [LiveServer, a VSCode extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)  
 - From VSCode  
 > Open index.html  
-> Click on status bar "Go live" or  
-> On index.html, right-click → Open with [LiveServer](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)  
-
-
+> Click on status bar "Go live" or right-click on index.html → Open with LiveServer
 
 ![Wed screenshoot](wed.png)
 
