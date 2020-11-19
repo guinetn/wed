@@ -1,0 +1,143 @@
+.background {
+  position: relative;
+  background: linear-gradient(to bottom, #28404e 0%, #1c2e38 100%);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+  width: 400px;
+  height: 400px;
+}
+
+.headerWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: white;
+  font-size: 20px;
+  line-height: 25px;
+}
+.headerWrapper__subtitle {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.metersWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  width: 100%;
+}
+.metersWrapper .meter {
+  position: relative;
+}
+.metersWrapper .meter .insideWrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.metersWrapper .meter .insideWrapper__number {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 22px;
+}
+.metersWrapper .meter .insideWrapper__desc {
+  font-size: 14px;
+  color: #648192;
+}
+.metersWrapper .meter svg {
+  width: 115px;
+  height: 115px;
+  fill: none;
+}
+.metersWrapper .meter svg .loader {
+  fill: none;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+.metersWrapper .meter svg .first {
+  stroke-width: 10px;
+  stroke: #27e1ae;
+  stroke-dasharray: 330;
+  stroke-dashoffset: 60;
+  animation: firstLine 2s ease-out;
+}
+.metersWrapper .meter svg .circle {
+  fill: none;
+  stroke: #1b2a33;
+  stroke-width: 10;
+}
+.metersWrapper__secondLine {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding-top: 30px;
+}
+.metersWrapper__secondLine .meter .insideWrapper__number {
+  font-size: 17px;
+}
+.metersWrapper__secondLine .meter .insideWrapper__desc {
+  font-size: 12px;
+}
+.metersWrapper__secondLine .meter svg {
+  width: 80px;
+  height: 80px;
+}
+.metersWrapper__secondLine .meter svg .circle {
+  stroke-width: 5px;
+}
+.metersWrapper__secondLine .meter svg .loader {
+  stroke: #5ce1ec;
+  stroke-width: 5px;
+  stroke-dasharray: 230;
+}
+.metersWrapper__secondLine .meter svg .second {
+  stroke-dashoffset: 80;
+  animation: secondLine 2s ease-out;
+}
+.metersWrapper__secondLine .meter svg .third {
+  stroke-dashoffset: 150;
+  animation: thirdLine 2s ease-out;
+}
+
+@keyframes firstLine {
+  from {
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dashoffset: 60;
+  }
+}
+@keyframes secondLine {
+  from {
+    stroke-dashoffset: 230;
+  }
+  to {
+    stroke-dashoffset: 80;
+  }
+}
+@keyframes thirdLine {
+  from {
+    stroke-dashoffset: 230;
+  }
+  to {
+    stroke-dashoffset: 150;
+  }
+}
