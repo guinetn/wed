@@ -30,6 +30,7 @@ document.querySelector("#clearConsole").addEventListener("click", clearConsole);
 window.addEventListener('load', init);
 
 function init() {  
+  consoleHook("textareConsole");
   templatesLib.initializeTemplates();
   initEditors();
   getLocalStorage();
@@ -95,14 +96,16 @@ function setInnerHTML(element, html)
         eval(codes[i].text);          
 }  
 
-// Console Hook (for display purpose). Extend if needed for warn/error…    
-(function(){
-    console.defaultLog = console.log.bind(console);		
-    console.log = function () {
-      console.defaultLog.apply(console, arguments);
-      previewConsole.innerHTML = Array.from(arguments)[0] + "\n" + previewConsole.innerHTML; // last logs are at top
-    };
- })();
+// Redirect console.log to an html element. Extend if needed for warn/error…          
+function consoleHook(htmlTarget){
+  const target = document.getElementById(htmlTarget);
+  console.defaultLog = console.log.bind(console);   
+  console.log = function () {
+    // argument: local variable available within all non-arrow functions
+    console.defaultLog.apply(console, arguments);            
+    target.innerHTML += "<br>" + Array.from(arguments)[0]; 
+  };
+};
 
 
 
