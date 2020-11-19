@@ -102,8 +102,8 @@ function consoleHook(htmlTarget){
   console.defaultLog = console.log.bind(console);   
   console.log = function () {
     // argument: local variable available within all non-arrow functions
-    console.defaultLog.apply(console, arguments);            
-    target.innerHTML += "<br>" + Array.from(arguments)[0]; 
+    console.defaultLog.apply(console, arguments);         
+    target.innerHTML = Array.from(arguments)[0] + "\n" + target.innerHTML; // last logs are on top          
   };
 };
 
