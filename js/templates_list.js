@@ -11,6 +11,7 @@ export const templates = [
   { name: "details & summary", lang: "css", files: "details_summary.html" },
   { name: "form placeholder", lang: "js", files: "form_placeholder.html, form_placeholder.css" },
   { name: "cards", lang: "html", files: "cards.html , cards.css" },
-  { name: "alert", lang: "js", content: "alert('hi');" },
+  { name: "alert", lang: "js", content: "alert('hi'); <!-- See templates_list.js. No files here, just content:`xxxx` -->" },
+  { name: "progress", lang: "html", files: "progress.html , progress.css" },
 ];
 
