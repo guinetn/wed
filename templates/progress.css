@@ -1,6 +1,7 @@
 .background {
   position: relative;
   background: linear-gradient(to bottom, #28404e 0%, #1c2e38 100%);
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   border-radius: 5px;
   display: flex;
   align-items: center;
