@@ -10,7 +10,7 @@ content   Raw template content
 export const templates = [
   { name: "details & summary", lang: "css", files: "details_summary.html" },
   { name: "form placeholder", lang: "js", files: "form_placeholder.html, form_placeholder.css" },
-  { name: "article", lang: "html", files: "article.html , article.css" },
+  { name: "cards", lang: "html", files: "cards.html , cards.css" },
   { name: "alert", lang: "js", content: "alert('hi');" },
 ];
 
