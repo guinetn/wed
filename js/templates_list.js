@@ -13,5 +13,6 @@ export const templates = [
   { name: "cards", lang: "html", files: "cards.html , cards.css" },
   { name: "alert", lang: "js", content: "alert('hi'); <!-- See templates_list.js. No files here, just content:`xxxx` -->" },
   { name: "progress", lang: "html", files: "progress.html , progress.css" },
+  { name: "bootstrap 5.1.3", lang: "html", files: "bootstrap-5.1.3.html" }
 ];
 
