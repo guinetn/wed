@@ -9,11 +9,17 @@ A web editor sided with editable samples for training/prototyping: <https://guin
 * Local storage to restore application state 
 
 ## Running Locally
->Open index.html  
 
-Complexe templates (are html & css files) require a server  
-- Ex: [LiveServer, a VSCode extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)  
-- From VSCode  
+### Install a server
+
+* Serve
+>npm i -g serve
+
+>cd […folder_path…]
+>serve 
+
+* VSCode Extension  
+Install [LiveServer, a VSCode extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)  
 > Open index.html  
 > Click on status bar "Go live" or right-click on index.html → Open with LiveServer
 

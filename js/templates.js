@@ -3,17 +3,17 @@ import { templates } from './templates_list.js';
 export function initializeTemplates() {
   const container = document.getElementById("templatesList");
   templates.forEach(template => {
-    let li = document.createElement("li");
+    let div = document.createElement("div");
 
-    li.innerText = `${template.name}  [${template.lang}]`;
-    li.setAttribute("data-lang", template.lang);
+    div.innerText = `${template.name}  [${template.lang}]`;
+    div.setAttribute("data-lang", template.lang);
 
     if (template.content != null) 
-      li.setAttribute("data-content", template.content);
+      div.setAttribute("data-content", template.content);
     else if (template.files != null) 
-      li.setAttribute("data-files", template.files);
+      div.setAttribute("data-files", template.files);
 
-    container.appendChild(li);
+    container.appendChild(div);
   });
 }
     
@@ -57,15 +57,15 @@ function getFile(file, callback) {
 
 export function filterTemplates() {
   
-  var filter, ul, li, item, i, txtValue;
+  var filter, templates, div, item, i, txtValue;
   
   filter = this.value.toUpperCase();  
-  ul = document.getElementById("templatesList");
-  li = ul.getElementsByTagName("li");
+  templates = document.getElementById("templatesList");
+  div = templates.getElementsByTagName("div");
 
   // Treats lists items like an array, where each item can be accessed through      it's index
-  for (i = 0; i < li.length; i++) {
-    item = li[i];
+  for (i = 0; i < div.length; i++) {
+    item = div[i];
 
     // All list item are checked to see if the value of the input, 
     // ignoring case, matches the inner text or inner html of the item.
@@ -73,9 +73,9 @@ export function filterTemplates() {
 
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
       // Displays list items that are a match, and nothing if no match
-      li[i].style.display = "";
+      div[i].style.display = "";
     } else {
-      li[i].style.display = "none";
+      div[i].style.display = "none";
     }
   }
 }

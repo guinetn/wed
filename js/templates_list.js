@@ -8,11 +8,13 @@ content   Raw template content
           NO SERVER is needed
 */
 export const templates = [
+  { name: "empty", lang: "html", files: "empty.html , empty.css" },
   { name: "details & summary", lang: "css", files: "details_summary.html" },
   { name: "form placeholder", lang: "js", files: "form_placeholder.html, form_placeholder.css" },
   { name: "cards", lang: "html", files: "cards.html , cards.css" },
   { name: "alert", lang: "js", content: "alert('hi'); <!-- See templates_list.js. No files here, just content:`xxxx` -->" },
   { name: "progress", lang: "html", files: "progress.html , progress.css" },
-  { name: "bootstrap 5.1.3", lang: "html", files: "bootstrap-5.1.3.html" }
+  { name: "event-delegation", lang: "html", files: "event-delegation.html , event-delegation.css" },
+  { name: "bootstrap 5.1.3", lang: "html", files: "bootstrap-5.1.3.html , bootstrap-5.1.3.css" }
 ];
 

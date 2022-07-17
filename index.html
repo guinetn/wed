@@ -12,57 +12,76 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/css/css.min.js"></script>
     
-    <!-- WeD Page Css -->
+    <!-- wed Page Css -->
     <link rel="stylesheet" href="index.css">
 
     <!-- This is how app's works: css & html are injected here. That's all  -->  
-    <!-- Where user's css are injected -->
+    <!-- ✨ Where user's css are injected -->
     <style class="wed-previewCss"></style>
-    <!-- Where user's js code is injected -->
+    <!-- ✨ Where user's js code is injected -->
     <script id="previewJS"></script>
 
 </head>
 <body class="wed-body">
-
-  <div class="wed-grid">
     
-    <div class="wed-preview"></div>  
+   <header class='wed-header'>
+      <div class='wed-header-logo'>🔥</div>
+      <div class='wed-header-links'>
+        <a>111</a>
+        <a>222</a>
+        <a>x</a>
+      </div>
+    </header>
 
-    <div class="wed-editors">
-
-        <div class="wed-editor htmlEditor">
-            <textarea id="textareaHtml"></textarea>   
-        </div>
-
-        <div class="wed-editor cssEditor">
-            <textarea id="textareaCss"></textarea>   
-        </div>
-
-    </div>
-       
-    <div class="wed-commands">       
-      <button id="clearCodes">Clear Codes</button>  
-      <button id="clearConsole">Clear Console</button>  
-    </div>
-
-    <div class="wed-consoleOutput">
-        <textarea id="textareConsole" readonly></textarea>   
-    </div>
-
-    <div class="wed-templates"> 
+ <main class='wed-main'>
+    <nav class="col wed-templates"> 
         <h4>Templates</h4>      
         <input type="text" id="wed-search" placeholder="Search">
-        <ul id="templatesList"></ul>
-    </div>
+        <div id="templatesList"></div>
+    </nav>
 
-  </div>    
-    
-<footer class="wed-footer">
-  <samp>Made with ❤️ by nicolas guinet<br>
-  <a href="https://github.com/guinetn/wed">https://github.com/guinetn/wed</a></samp>
-</footer>    
+        <section class="content">
 
-  <script type="module" src="js/index.js"></script>    
+            <div class="row canvresize"> 
+                <section class='col wed-preview'>
+                </section>
+            </div>
+            
+            <div class="row">
+              <div class="col canhresize"> 
+                    <textarea id="textareaHtml">code</textarea> 
+                         <div class='editor-action'>
+                            <button title='Clear Html' id="clearCodes">❌</button>  
+                            <button title='Copy Html' id="copyCode">📋</button>  
+                         </div>
+              </div>
+              <div class="col "> 
+                    <textarea id="textareaCss">css</textarea> 
+                         <div class='editor-action'>
+                            <button title='Clear css' id="clearCss">❌</button>  
+                            <button title='Copy css' id="copyCss">📋</button>  
+                        </div> 
+              </div>
+            </div>
+            
+             <div class="row nogrow"> 
+                <div class='col'>
+                    <section class='console'>
+                        <textarea id="textareaConsole" readonly></textarea>   
+                        <button title='Clear console' class='editor-action' id="clearConsole">❌</button>  
+                    </section>
+                </div>
+            </div>
+        </section> 
+
+</main>
+        
+    <footer class="wed-footer">
+      <samp>Made with ❤️ by nicolas guinet <a href="https://github.com/guinetn/wed">https://github.com/guinetn/wed</a></samp>
+    </footer>    
+
+  
+    <script type="module" src="js/index.js"></script>    
    
 </body>
 </html>
