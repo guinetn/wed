@@ -1,5 +1,6 @@
 import * as templatesLib from "./templates.js";
 import {config} from "./config.js";
+import * as sublime from "./sublime.js";
 
 // Code mirror
 let cmHtml = undefined;
@@ -39,6 +40,7 @@ function initEditors() {
       mode: "javascript",
       theme: "monokai",
       lineWrapping: true,
+      keyMap: "sublime"
     }
   );
 
@@ -47,6 +49,7 @@ function initEditors() {
     mode: "css",
     theme: "monokai",
     lineWrapping: true,
+    keyMap: "sublime"
   });
 
   //cmHtml.setSize(600, 300);

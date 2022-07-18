@@ -8,28 +8,33 @@ html {
   flex-direction: column; 
   min-height: 99%;  
   flex-wrap: wrap;
+  font-family: system-ui;
 }
 
 .wed-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    position:relative;
     height: auto;
-    background: dark;
     margin-right: 0.5em;
-    z-index: 1001;
-    padding: 0.4em;
+    color:  white;
+    font-size: x-large;
 }
 
+.wed-header-title {
+    margin-left: 3em;
+}
 .wed-header-logo {
-    left:11px;
+    left:20px;
     position: absolute;
-    top:10px;
+    top:-3px;
+    font-size: xxx-large;
 }
 
 .wed-header-links {
+    font-size: small;
+
 }
 
 .wed-main {
@@ -41,13 +46,13 @@ html {
 
 
 #textareaConsole {
-     min-width: 100%;
-     max-width: 100%;
-     min-height: 4em;
-     max-height: 30vh;
-     resize: vertical;
-      background: black;
-      color: yellow;
+ min-width: 100%;
+ max-width: 100%;
+ min-height: 4em;
+ max-height: 30vh;
+ resize: vertical;
+  background: black;
+  color: yellow;
 }
 
 textarea {
@@ -73,32 +78,26 @@ z-index: 100;
   flex-direction: column;
 }
 
-.row {
+.wed-row {
   display: flex;
   flex: 1 0 auto;
   flex-direction: row;
 }
 
-.col {
+.wed-col {
   position: relative;
   flex: 1 0 auto;
-  border: solid 1px lightgrey;
 }
 
-.nogrow {
+.wed-nogrow {
     flex-grow: 0; 
 }
 
+.wed-border {
+  border: solid 1px lightgrey;
 
-.wed-templates {
-  border:solid rgba(0, 0, 0, 0.164) 1px;
-  background-color: #333;
-  letter-spacing: 2px;
-  font-family: "Playfair Display";
-  flex: 0 0 10em;
-  font-size: 0.75em;
-  background: #cccccc;
 }
+
 
 .wed-preview {
  background: #FFF;
@@ -126,14 +125,34 @@ z-index: 100;
     padding: 0 2px;
 }
 
-.wed-footer  a:visited {
+.wed-header-links  a:visited, .wed-footer  a:visited {
     color: lightseagreen;
+    text-decoration: none;
+}
+
+
+.wed-templates {
+  flex: 0 0 10em;
+  font-size: 0.8em;
+  color: white;
+  text-align: center;
 }
 
 div[data-lang] {
-    background-color: black;
     color: aqua;
     padding: 3px;
     text-align: end;
-    border: solid 1px white;
+    margin-right: 1em;
+}
+
+/* SEARCH */
+#wed-search {
+    background: transparent url(img/search.png) 10px 7px no-repeat;      
+    border: solid 1px rgba(116, 114, 114, 0.712);
+    border-radius: 35px;
+    padding: 7px 14px;                        
+    margin: 5px 2px;
+    width: 180px;
+    color: #857f7f;
+    text-indent: 20px;
 }

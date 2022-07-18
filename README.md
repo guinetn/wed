@@ -3,7 +3,7 @@ A web editor sided with editable samples for training/prototyping: <https://guin
 
 ## Features
 
-* Html/css/js editor   
+* Html/css/js editor (SublimeText keymap)  
 * Realtime rendering as you type
 * Console.log() outputs are catched and displayed
 * Templates injection by simple click      

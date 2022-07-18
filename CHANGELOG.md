@@ -22,21 +22,22 @@ Good to have: commit or PR links.
 
 -->
 
-## v1.0.1
+## v.2.0
 
 ### Changed
 
-- Start vocal notification immediately at startup (before we have to wait for the interval)
+- [Add SublimeText keymap for html and css editor](https://codemirror.net/5/doc/manual.html#keymaps)
+- Improve some css 
 
-## v1.0.0
+## v0.1.0
 
 ### Changed
 
-- Use pure XAML as window definition
-- Add images  
+- Use css flexbox instead of css grid
+- Add templates  
 - Review README
 - Add CHANGELOG
 
 ## v0.0.1 
 
-- POC, testing jq library
+- POC, testing things

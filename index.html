@@ -25,37 +25,40 @@
 <body class="wed-body">
     
    <header class='wed-header'>
-      <div class='wed-header-logo'>🔥</div>
+      <div>
+        <div class='wed-header-logo'>🔥</div>
+        <span class='wed-header-title'>WED <sup>0.2.0</sup></span>
+      </div>
       <div class='wed-header-links'>
-        <a>111</a>
-        <a>222</a>
-        <a>x</a>
+        <a href="https://getbootstrap.com/docs/5.1/getting-started/introduction/" target='_blank'>Bootstrap</a>
+        <a href="https://fontawesome.com/icons/location-pin?s=solid" target='_blank'>fontawesome</a>
+        <a href="https://emojipedia.org" target='_blank'>emoji</a>
       </div>
     </header>
 
  <main class='wed-main'>
-    <nav class="col wed-templates"> 
-        <h4>Templates</h4>      
+    <nav class="wed-col wed-templates"> 
+        <h4>TEMPLATES</h4>      
         <input type="text" id="wed-search" placeholder="Search">
         <div id="templatesList"></div>
     </nav>
 
         <section class="content">
 
-            <div class="row canvresize"> 
-                <section class='col wed-preview'>
+            <div class="wed-row canvresize"> 
+                <section class='col wed-border wed-preview'>
                 </section>
             </div>
             
-            <div class="row">
-              <div class="col canhresize"> 
+            <div class="wed-row">
+              <div class="wed-col wed-border canhresize"> 
                     <textarea id="textareaHtml">code</textarea> 
                          <div class='editor-action'>
                             <button title='Clear Html' id="clearCodes">❌</button>  
                             <button title='Copy Html' id="copyCode">📋</button>  
                          </div>
               </div>
-              <div class="col "> 
+              <div class="wed-col wed-border"> 
                     <textarea id="textareaCss">css</textarea> 
                          <div class='editor-action'>
                             <button title='Clear css' id="clearCss">❌</button>  
@@ -64,8 +67,8 @@
               </div>
             </div>
             
-             <div class="row nogrow"> 
-                <div class='col'>
+             <div class="wed-row wed-nogrow"> 
+                <div class='wed-col wed-border'>
                     <section class='console'>
                         <textarea id="textareaConsole" readonly></textarea>   
                         <button title='Clear console' class='editor-action' id="clearConsole">❌</button>  
