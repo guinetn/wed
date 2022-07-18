@@ -29,7 +29,7 @@ Install [LiveServer, a VSCode extension](https://marketplace.visualstudio.com/it
 	Open index.html
 	Click on VSCode status bar "Go live" or right-click on index.html → Open with LiveServer
 
-![Wed screenshoot](wed.png)
+![Wed screenshoot](img/wed.png)
 
 # CREATE YOUR OWN TEMPLATES
 
