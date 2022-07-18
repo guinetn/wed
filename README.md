@@ -54,9 +54,20 @@ Templates are defined in `js\templates_list.js` and can be
 * [CodeMirror V5.65.6](https://codemirror.net/)
 * FlexBox Layout
 
+## CONTRIBUTING
+
+Wow, thanks to contribute to this project!   
+New ideas, samples, forks...are welcome.  
+So please just fork it, commit, push and send me a pull request to main.  
+
+## CHANGELOG
+
+See [CHANGELOG](CHANGELOG.md) for more details.
+
 
 ## License
 
+This project is licensed under the [MIT License](LICENSE)
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ---
