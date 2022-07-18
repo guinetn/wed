@@ -52,8 +52,8 @@ function initEditors() {
     keyMap: "sublime"
   });
 
-  //cmHtml.setSize(600, 300);
-  //cmCss.setSize(600, 300);
+  // cmHtml.setSize("100%", "100%");
+  // cmCss.setSize("100%", "100%");
 
   cmHtml.on("changes", () => update());
   cmCss.on("changes", () => update());

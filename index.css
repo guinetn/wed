@@ -156,3 +156,32 @@ div[data-lang] {
     color: #857f7f;
     text-indent: 20px;
 }
+
+.template-select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: space-between;
+}
+.template {
+    flex: 1 0 auto;
+    border: solid 1px black;
+    border-radius: 4px;
+    background-color: red;
+        margin: 0.3em;
+}
+
+.css-template {
+    background-color: yellow;
+}
+
+.html-template {
+    background-color: greenyellow;
+}
+
+.react-template {
+    background-color: goldenrod;
+}
+
+.js-template {
+    background-color: cornflowerblue;
+}
