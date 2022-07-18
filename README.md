@@ -2,50 +2,65 @@
 A web editor sided with editable samples for training/prototyping: <https://guinetn.github.io/wed> 
 
 ## Features
+
 * Html/css/js editor   
-* Realtime modifications rendering
-* Console outputs catched and displayed
+* Realtime rendering as you type
+* Console.log() outputs are catched and displayed
 * Templates injection by simple click      
-* Local storage to restore application state 
+* Startup will restore last application state (css and html code panel)  
+* Xss attacks are welcome (you're js code is run as it is, but you're on commands)
 
-## Running Locally
+## Setup
 
-### Install a server
+### Running online
 
-* Serve
+Just deploy the folder on an http server
+
+### Running locally: install a local server
+
+* Using 'Serve' npm package 
 >npm i -g serve
-
->cd […folder_path…]
+>cd […project_path…]  
 >serve 
 
-* VSCode Extension  
+* Using 'LiveServer' VSCode Extension  
 Install [LiveServer, a VSCode extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)  
-> Open index.html  
-> Click on status bar "Go live" or right-click on index.html → Open with LiveServer
+> Open the project's folder in VSCode
+> Open index.html
+> Click on VSCode status bar "Go live" or right-click on index.html → Open with LiveServer
 
 ![Wed screenshoot](wed.png)
 
 <pre> <code>
-+------------------+    +------------------+  
-+   Render zone    +    +     TEMPLATES    +  
-+------------------+    .                  .  
-+------------------+  
-+  Editable code   +  
-+------------------+  
-[Commands]    
-+------------------+  
-+  console output  +    .                  .  
-+------------------+    +------------------+  
++--------------++------------------+   
++   Templates  ++   Render zone    +   
++              ++------------------+   
++              ++  Editable code   +  
++              ++   HTML  |  CSS   +  
++              ++------------------+  
++              ++  Console output  +   
++--------------++------------------+   
 </code></pre>
 
-# Templates
+# CREATE YOUR OWN TEMPLATES
 
-Defined in ***js\templates_list.js***  
-Can be  
-* a simple snippet (no server is required)
-* an html and/or css page (then a server is required. LiveServer in vscode is enough)
+Templates are defined in `js\templates_list.js` and can be  
+* a simple snippet 
+* an html and/or css / javascript snippet
 
-# Development tools
+# TECH STACK
 
-* VSCode + LiveServer
-* CodeMirror
+* VSCode + Extensions: LiveServer
+* [CodeMirror V5.65.6](https://codemirror.net/)
+* FlexBox Layout
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+---
+
+*created by Nicolas Guinet*
+
+
