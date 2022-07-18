@@ -22,7 +22,13 @@ Good to have: commit or PR links.
 
 -->
 
-## v.2.0
+## v0.2.1
+
+### Changed
+
+- New: App's version check at startup 
+
+## v0.2.0
 
 ### Changed
 
