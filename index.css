@@ -110,6 +110,10 @@ z-index: 100;
 }
 
 
+#wed-version {
+    font-size: x-small;
+}
+
 .canhresize {
      resize: horizontal; 
      overflow: auto;
