@@ -8,6 +8,7 @@ content   Raw template content
           NO SERVER is needed
 */
 export const templates = [
+  { name: "default", lang: "html", files: "default.html , default.css" },
   { name: "empty", lang: "html", files: "empty.html , empty.css" },
   { name: "details & summary", lang: "css", files: "details_summary.html" },
   { name: "form placeholder", lang: "js", files: "form_placeholder.html, form_placeholder.css" },

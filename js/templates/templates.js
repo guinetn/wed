@@ -1,5 +1,7 @@
 import { templates } from './templates_list.js';
 
+export { templates }
+
 export function initializeTemplates() {
   const container = document.getElementById("templatesList");
   templates.forEach(template => {

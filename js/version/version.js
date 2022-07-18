@@ -1,5 +1,5 @@
 import {version_config} from "./version_config.js";
-import {httpGet} from "./utilities.js";
+import {httpGet} from "../utilities/utilities.js";
 
 let version = {
     config: version_config,

@@ -1,6 +1,4 @@
-import {default_template} from "./default_template.js";
-import {version} from "./version.js";
-
+import {version} from "./version/version.js";
 
 function version_check () {
     version.get_tatest_version_available(update_ui_version);    
@@ -27,7 +25,6 @@ function update_ui_version () {
 export const config = {
     templatesDirectory: "templates",
     ...{version},
-    version_check,
-    ...default_template
+    version_check
 }
     

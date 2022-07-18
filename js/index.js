@@ -1,15 +1,9 @@
-import * as templatesLib from "./templates.js";
+import * as templatesLib from "./templates/templates.js";
 import {config} from "./config.js";
-import * as sublime from "./sublime.js";
-
-// Code mirror
-let cmHtml = undefined;
-let cmCss = undefined;
+import * as editor from "./editor/editor.js";
+import * as console from "./console/console.js";
 
 // Preview elements
-var previewCss = document.querySelector('.wed-previewCss');
-var previewHtml = document.querySelector('.wed-preview');
-var previewConsole = document.querySelector('#textareaConsole');
 
 // Templates
 templatesList.addEventListener("click", templateSelected);
@@ -18,92 +12,17 @@ templatesList.addEventListener("click", templateSelected);
 document.querySelector("#wed-search").addEventListener("change", templatesLib.filterTemplates); // Paste
 document.querySelector("#wed-search").addEventListener("keyup", templatesLib.filterTemplates);  // Key pressed
 
-// Commands
-document.querySelector('#clearCodes').addEventListener('click', clearCodes);
-document.querySelector("#clearConsole").addEventListener("click", clearConsole);
-
 // Init
 window.addEventListener('load', init);
 
 function init() {  
-  consoleHook("textareaConsole");
+  console.consoleHook("textareaConsole");
   templatesLib.initializeTemplates();
-  initEditors();
-  getLocalStorage();
   config.version_check();
+  if (editor.init(config)) {
+    getTemplate( templatesLib.templates[0].files);
+  }
 }
-
-function initEditors() {
-  
-  cmHtml = new CodeMirror.fromTextArea(document.getElementById("textareaHtml"),
-    {
-      lineNumbers: true,
-      mode: "javascript",
-      theme: "monokai",
-      lineWrapping: true,
-      keyMap: "sublime"
-    }
-  );
-
-  cmCss = new CodeMirror.fromTextArea(document.getElementById("textareaCss"), {
-    lineNumbers: true,
-    mode: "css",
-    theme: "monokai",
-    lineWrapping: true,
-    keyMap: "sublime"
-  });
-
-  // cmHtml.setSize("100%", "100%");
-  // cmCss.setSize("100%", "100%");
-
-  cmHtml.on("changes", () => update());
-  cmCss.on("changes", () => update());
-}
-
-// Commands
-
-function clearCodes() {
-  setEditors();      
-}
-
-function clearConsole() {
-  previewConsole.innerHTML = "";
-}
-
-// Preview
-
-function update() { 
-    const css = cmCss.getValue(); 
-    const html = cmHtml.getValue(); 
-    setPreview(css, html);
-    setLocalStorage(css, html);
-}
-
-function setPreview(cssCode, htmlCode) {
-  previewCss.innerHTML = cssCode;
-  setInnerHTML(previewHtml, htmlCode);
-}
-
-// Render html & eval <script> (Welcome Xss attacks, but you're on commands ;) See an original xss punishment at https://fdossena.com/?p=xsspunish/i.md)
-function setInnerHTML(element, html)  
-{          
-    element.innerHTML = html;  
-    var codes = element.getElementsByTagName("script");   
-    for(var i=0;i<codes.length;i++)          
-        eval(codes[i].text);          
-}  
-
-// Redirect console.log to an html element. Extend if needed for warn/error…          
-function consoleHook(htmlTarget){
-  const target = document.getElementById(htmlTarget);
-  console.defaultLog = console.log.bind(console);   
-  console.log = function () {
-    // argument: local variable available within all non-arrow functions
-    console.defaultLog.apply(console, arguments);         
-    target.innerHTML = Array.from(arguments)[0] + "\n" + target.innerHTML; // last logs are on top          
-  };
-};
-
 
 
 // Templates
@@ -118,51 +37,40 @@ function templateSelected(event) {
         applyTemplate(null,content);
     }
     else {
-        const files = event.srcElement.getAttribute("data-files");          
-        templatesLib.getTemplateFiles(config.templatesDirectory, files, applyTemplate);          
+        const files = event.srcElement.getAttribute("data-files");   
+      getTemplate( files );
     }
 }    
 
-  function applyTemplate(file, result) {
-    if (file == null) {
-      cmCss.setValue("");  
-      cmHtml.setValue(result);      
-    } else {
-      const ext = file.split(".");
+function getTemplate(files) {
+  templatesLib.getTemplateFiles(config.templatesDirectory, files, applyTemplate);          
+}
 
-      if (ext.length < 2) {
-        console.log(`Error with ${file}: no extension`);
-        return;
-      }
+function applyTemplate(file, result) {
+  if (file == null) {
+    editor.cmCss.setValue("");  
+    editor.cmHtml.setValue(result);     
+    return; 
+  } 
+  
+  const ext = file.split(".");
 
-      switch (ext[1]) {
-        case "css":
-          cmCss.setValue(result);
-          break;
-        case "html":
-          cmHtml.setValue(result);
-          break;
-      }
-    }
+  if (ext.length < 2) {
+    console.log(`Error with ${file}: no extension`);
+    return;
   }
 
-
-  // Storage
-
-  var setLocalStorage = function (css, html) {        
-    localStorage.setItem("user-css", css);    
-    localStorage.setItem("user-html", html);    
-  };
-
-  function getLocalStorage() {
-    var userCss = localStorage.getItem("user-css");            
-    var userHtml = localStorage.getItem("user-html");            
-    setEditors(
-      userCss != null ? userCss : config.initialCss,    
-      userHtml != null ? userHtml : config.initialHtml);        
-  };
-
-  function setEditors(css="", html="") {
-     cmCss.setValue(css);
-     cmHtml.setValue(html);        
+  switch (ext[1]) {
+    case "css":
+      editor.cmCss.setValue(result);
+      break;
+    case "html":
+      editor.cmHtml.setValue(result);
+      break;
   }
+  
+}
+
+
+
+

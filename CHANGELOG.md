@@ -27,6 +27,7 @@ Good to have: commit or PR links.
 ### Changed
 
 - New: App's version check at startup 
+- Move default template from hard coded to files
 
 ## v0.2.0
 
