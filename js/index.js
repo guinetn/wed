@@ -30,10 +30,8 @@ function init() {
   templatesLib.initializeTemplates();
   initEditors();
   getLocalStorage();
-  config.version_show();
   config.version_check();
 }
-
 
 function initEditors() {
   
@@ -61,8 +59,6 @@ function initEditors() {
   cmHtml.on("changes", () => update());
   cmCss.on("changes", () => update());
 }
-
-
 
 // Commands
 
