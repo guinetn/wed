@@ -1,6 +1,8 @@
 # wed
 A web editor sided with editable samples for training/prototyping: <https://guinetn.github.io/wed> 
 
+![Wed screenshoot](img/wed.png)
+
 ## Features
 
 * Html/css/js editor (SublimeText keymap)  
@@ -28,8 +30,6 @@ Install [LiveServer, a VSCode extension](https://marketplace.visualstudio.com/it
 	Open the project's folder in VSCode
 	Open index.html
 	Click on VSCode status bar "Go live" or right-click on index.html → Open with LiveServer
-
-![Wed screenshoot](img/wed.png)
 
 # CREATE YOUR OWN TEMPLATES
 
