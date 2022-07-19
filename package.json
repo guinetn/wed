@@ -1,0 +1,25 @@
+{
+  "name": "wed",
+  "version": "1.0.0",
+  "description": "Online web editor",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guinetn/wed.git"
+  },
+  "keywords": [
+    "online",
+    "web",
+    "editor"
+  ],
+  "author": "nicolas guinet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guinetn/wed/issues"
+  },
+  "homepage": "https://github.com/guinetn/wed#readme"
+}

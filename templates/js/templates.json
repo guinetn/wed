@@ -1,0 +1,4 @@
+[
+    { "name": "alert", "lang": "js", "content": "alert('hi'); <!-- See templates_list.js. No files here, just \"content\":`xxxx` -->" },
+    { "name": "event-delegation", "lang": "js", "files": "event-delegation.html , event-delegation.css" }
+]

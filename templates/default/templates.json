@@ -1,0 +1,5 @@
+[
+    { "name": "default", "lang": "html", "files": "default.html , default.css" },
+    { "name": "empty", "lang": "html", "files": "empty.html , empty.css" }
+]
+

@@ -168,7 +168,7 @@ div[data-lang] {
     text-indent: 20px;
 }
 
-.template-select {
+#templatesCategories {
     display: flex;
     flex-wrap: wrap;
     justify-items: space-between;
@@ -196,3 +196,34 @@ div[data-lang] {
 .js-template {
     background-color: cornflowerblue;
 }
+
+/* BUTTONS */
+
+/* BUTTONS */
+button.template {
+ background: #333;
+    display: inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;            
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+}
+
+.editor-btn {
+    background: #0000;
+    color: #FFFFFF;
+    transition: all 0.2s;
+    font-size: larger;
+}
+.editor-btn:hover {
+    background-color:#4e4b4b;
+    transform: scale(1.05);
+}
+
+

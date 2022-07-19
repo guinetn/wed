@@ -1,0 +1,28 @@
+ <div class="containerEvdlgt">
+      <div>AA</div>
+      <div>BB</div>
+      <div onclick='callDiv'>CC</div>
+      <button onclick='CallBt'>B1</button>
+      <button onclick='CallBt'>B2</button>
+</div>
+
+<script>
+
+document.querySelector(".containerEvdlgt").addEventListener("click", function(event) {
+    // console.log(event.target);
+
+    if (! event.target.matches("button")) {
+        console.log(`${event.target.nodeName} IGNORED`);
+        return;
+    }
+    //  if (event.target.matches('input')) {
+    //  if (event.target && event.target.nodeName == 'BUTTON') { ... }
+    //  if (!event.target.matches('#click-me')) { … }
+    //  if (!event.target.matches('.sandwich')) return;
+    //  if (event.target.matches('[data-onclick="addTask"]')) { ... }
+    //  var todo = event.target.getAttribute('data-todo')
+
+    console.log(`${event.target.nodeName} CLICKED`);
+
+});
+</script>

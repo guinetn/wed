@@ -22,6 +22,15 @@ Good to have: commit or PR links.
 
 -->
 
+
+## v3.0.0
+
+### Changed
+
+- Add categories 
+- Add package.json: 'npm run build' will create templates/templates.json 
+
+
 ## v0.2.1
 
 ### Changed

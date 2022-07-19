@@ -1,4 +1,5 @@
 import * as sublime from "./sublime.js";
+import {copyToClipboard} from "../utilities/utilities.js";
 
 // Code mirror
 let cmHtml = undefined;
@@ -8,7 +9,10 @@ var previewCss = document.querySelector('.wed-previewCss');
 var previewHtml = document.querySelector('.wed-preview');
 
 // Commands
-document.querySelector('#clearCodes').addEventListener('click', clearCodes);
+document.querySelector('#clearHtml').addEventListener('click', clearHtml);
+document.querySelector('#clearCss').addEventListener('click', clearCss);
+document.querySelector('#copyHtml').addEventListener('click', copyHtml);
+document.querySelector('#copyCss').addEventListener('click', copyCss);
 
 // return true if localstorage has no data and need to be set at default template
 function init(config) {
@@ -47,8 +51,20 @@ function setEditors(css="", html="") {
    cmHtml.setValue(html);        
 }
 
-function clearCodes() {
-  setEditors();      
+function clearCss() {
+  cmCss.setValue('');   
+}
+
+function clearHtml() {
+  cmHtml.setValue('');   
+}
+
+function copyCss() {
+  copyToClipboard(cmCss.getValue());   
+}
+
+function copyHtml() {
+  copyToClipboard(cmHtml.getValue());   
 }
 
 // Preview
@@ -91,5 +107,5 @@ function getLocalStorage(config) {
     return (userCss ==null && userHtml == null);
 };
 
-export {cmHtml, cmCss , init, clearCodes}
+export {cmHtml, cmCss , init}
 

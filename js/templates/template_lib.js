@@ -1,25 +1,71 @@
-import { templates } from './templates_list.js';
+import { templates } from '../../templates/templates.js';
 
-export { templates }
 
-export function initializeTemplates() {
-  const container = document.getElementById("templatesList");
-  templates.forEach(template => {
-    let div = document.createElement("div");
+export function setupCategoriesContainer(templateCategoriesContainerId) {
+  const container = document.getElementById(templateCategoriesContainerId);
 
-    div.innerText = `${template.name}  [${template.lang}]`;
-    div.setAttribute("data-lang", template.lang);
+ const categories = Object.entries(templates);
+  for (let [k, v] of categories) {
 
-    if (template.content != null) 
-      div.setAttribute("data-content", template.content);
-    else if (template.files != null) 
-      div.setAttribute("data-files", template.files);
+    if (k=='default') {
+      continue;
+    }
+    
+    let button = document.createElement("button");
+    button.className = "template html-template";
+    button.innerText = k;
+    container.appendChild(button);    
+  }
+}
 
-    container.appendChild(div);
-  });
+export function setupContainer(templateContainerId, category='html') {
+  
+  const container = document.getElementById(templateContainerId);
+  container.innerHTML = "";
+  showCategoryTemplates('default', container);
+  showCategoryTemplates(category, container);
 }
     
-export function getTemplateFiles(dir, files, callback) {
+
+/*
+templates: [
+
+    category
+    ↓
+  'html': [
+
+    category items
+        ↓
+    { "name": "cards", "lang": "html", "files": "cards.html , cards.css" },
+    { "name": "progress", "lang": "html", "files": "progress.html , progress.css" }
+     …
+   ],
+   'css': …
+
+]
+*/
+function showCategoryTemplates(category, container) {
+
+  const cat = category.toLowerCase();
+  const categoryItems = Object.entries(templates[cat]);
+  for (let [k, v] of categoryItems) {
+
+    let div = document.createElement("div");
+
+    div.innerText = `${v.name}  [${v.lang}]`;
+    div.setAttribute("data-lang", v.lang);
+    div.setAttribute("data-category", cat);
+
+    if (v.content != null) 
+      div.setAttribute("data-content", v.content);
+    else if (v.files != null) 
+      div.setAttribute("data-files", v.files);
+
+    container.appendChild(div);
+  }
+}
+
+export function getTemplate(dir, files, callback) {
   
   files.split(",").forEach(f => {
     getFile(`${dir}/${f.trim()}`, callback);

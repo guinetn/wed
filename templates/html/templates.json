@@ -1,0 +1,7 @@
+[
+  { "name": "details & summary", "lang": "html", "files": "details_summary.html" },
+  { "name": "form placeholder", "lang": "html", "files": "form_placeholder.html, form_placeholder.css" },
+  { "name": "cards", "lang": "html", "files": "cards.html , cards.css" },
+  { "name": "progress", "lang": "html", "files": "progress.html , progress.css" }
+]
+

@@ -28,7 +28,7 @@
       <div>
         <div class='wed-header-logo'>🔥</div>
             <span class='wed-header-title'>WED <sup> 
-            <span id="wed-version">🔥🔥🔥VERSION IS INJECTED HERE🔥🔥🔥</span> 
+            <span id="wed-version">🔥🔥🔥…checking version…🔥🔥🔥</span> 
             <span id='update_sign' class='hidden'>🛎️</span> </sup> </span>
       </div>
       <div class='wed-header-links'>
@@ -41,8 +41,8 @@
  <main class='wed-main'>
     <nav class="wed-col wed-templates"> 
         <h4>TEMPLATES</h4> 
-        <section class='template-select'>
-            <button class='template css-template'>CSS</button>
+        <section id="templatesCategories">
+            <!-- <button class='template css-template'>CSS</button>
             <button class='template html-template'>HTML</button>
             <button class='template js-template'>JS</button>
             <button class='template react-template'>REACT</button>            
@@ -55,7 +55,7 @@
             <button class='template css-template'>CSS</button>
             <button class='template css-template'>HTML</button>
             <button class='template js-template'>JS</button>
-            <button class='template react-template'>REACT</button>
+            <button class='template react-template'>REACT</button> -->
         </section>     
         <input type="text" id="wed-search" placeholder="Search">
         <div id="templatesList"></div>
@@ -72,15 +72,15 @@
               <div class="wed-col wed-border canhresize"> 
                     <textarea id="textareaHtml">code</textarea> 
                          <div class='editor-action'>
-                            <button title='Clear Html' id="clearCodes">❌</button>  
-                            <button title='Copy Html' id="copyCode">📋</button>  
+                            <button class='editor-btn' title='Clear Html' id="clearHtml">❌</button>  
+                            <button class='editor-btn' title='Copy Html' id="copyHtml">📋</button>  
                          </div>
               </div>
               <div class="wed-col wed-border"> 
                     <textarea id="textareaCss">css</textarea> 
                          <div class='editor-action'>
-                            <button title='Clear css' id="clearCss">❌</button>  
-                            <button title='Copy css' id="copyCss">📋</button>  
+                            <button class='editor-btn' title='Clear css' id="clearCss">❌</button>  
+                            <button class='editor-btn' title='Copy css' id="copyCss">📋</button>  
                         </div> 
               </div>
             </div>
@@ -89,7 +89,7 @@
                 <div class='wed-col wed-border'>
                     <section class='console'>
                         <textarea id="textareaConsole" readonly></textarea>   
-                        <button title='Clear console' class='editor-action' id="clearConsole">❌</button>  
+                        <button title='Clear console' class='editor-btn editor-action' id="clearConsole">❌</button>  
                     </section>
                 </div>
             </div>
