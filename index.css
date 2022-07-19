@@ -201,7 +201,7 @@ div[data-lang] {
 
 /* BUTTONS */
 button.template {
- background: #333;
+    background: #333;
     display: inline-block;
     padding:0.35em 1.2em;
     border:0.1em solid #FFFFFF;
@@ -213,6 +213,8 @@ button.template {
     color:#FFFFFF;
     text-align:center;
     transition: all 0.2s;
+    border-radius: 9px;
+    text-transform: uppercase;
 }
 
 .editor-btn {
