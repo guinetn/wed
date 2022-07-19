@@ -1,14 +1,12 @@
-/* Templates content 
-name      Template description. For display/filter purpose
-lang      Type of the template: js, css, html. For display/filter purpose
-files     Template content are in .html and/or .css files comma separated
-          A SERVER IS NEEDED
-          Ignored if content is set
-content   Raw template content
-          NO SERVER is needed
+/* Categories have templates 
+templates json object: 
+    name      Template description. For display/filter purpose
+    lang      Type of the template: js, css, html. For display/filter purpose
+    files     Template content are in .html and/or .css files comma separated. Ignored if content is set
+    content   Raw template content.It set, it will overrides files 
 */
 
-export const templates = { 
+export const categories = { 
 
 'css': [
     { "name": "css 1", "lang": "js", "files": "css1.html , css1.css" }

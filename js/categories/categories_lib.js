@@ -1,11 +1,9 @@
-import { templates } from '../../templates/templates.js';
+import { categories } from '../../categories/categories.js';
 
+export function showCategories(container) {
 
-export function setupCategoriesContainer(templateCategoriesContainerId) {
-  const container = document.getElementById(templateCategoriesContainerId);
-
- const categories = Object.entries(templates);
-  for (let [k, v] of categories) {
+ const categories_items = Object.entries(categories);
+  for (let [k, v] of categories_items) {
 
     if (k=='default') {
       continue;
@@ -18,12 +16,11 @@ export function setupCategoriesContainer(templateCategoriesContainerId) {
   }
 }
 
-export function setupContainer(templateContainerId, category='html') {
+export function showTemplates(container, category='html') {
   
-  const container = document.getElementById(templateContainerId);
   container.innerHTML = "";
-  showCategoryTemplates('default', container);
-  showCategoryTemplates(category, container);
+  addTemplates(container, 'default');
+  addTemplates(container, category);
 }
     
 
@@ -44,11 +41,11 @@ templates: [
 
 ]
 */
-function showCategoryTemplates(category, container) {
+function addTemplates(container, category) {
 
   const cat = category.toLowerCase();
-  const categoryItems = Object.entries(templates[cat]);
-  for (let [k, v] of categoryItems) {
+  const categoryTemplates = Object.entries(categories[cat]);
+  for (let [k, v] of categoryTemplates) {
 
     let div = document.createElement("div");
 
@@ -101,14 +98,14 @@ function getFile(file, callback) {
   });
 }
 
-/* SEARCH*/
+/* SEARCH */
 
 export function filterTemplates() {
   
   var filter, templates, div, item, i, txtValue;
   
   filter = this.value.toUpperCase();  
-  templates = document.getElementById("templatesList");
+  templates = document.getElementById("categoryTemplatesList");
   div = templates.getElementsByTagName("div");
 
   // Treats lists items like an array, where each item can be accessed through      it's index

@@ -1,7 +1,7 @@
 import {version} from "./version/version.js";
 
-function version_check () {
-    version.get_tatest_version_available(update_ui_version);    
+function check_version () {
+    version.get_latest_version_available(update_ui_version);    
 }
 
 function create_update_message () {
@@ -23,8 +23,8 @@ function update_ui_version () {
 }  
 
 export const config = {
-    templatesDirectory: "templates",
+    categoriesDirectory: "categories",
     ...{version},
-    version_check
+    check_version
 }
     

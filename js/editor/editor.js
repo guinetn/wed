@@ -15,7 +15,7 @@ document.querySelector('#copyHtml').addEventListener('click', copyHtml);
 document.querySelector('#copyCss').addEventListener('click', copyCss);
 
 // return true if localstorage has no data and need to be set at default template
-function init(config) {
+function setupEditors(config) {
   
   cmHtml = new CodeMirror.fromTextArea(document.getElementById("textareaHtml"),
     {
@@ -38,8 +38,8 @@ function init(config) {
   // cmHtml.setSize("100%", "100%");
   // cmCss.setSize("100%", "100%");
 
-  cmHtml.on("changes", () => update());
-  cmCss.on("changes", () => update());
+  cmHtml.on("changes", () => updateHtml());
+  cmCss.on("changes", () => updateCss());
 
   return getLocalStorage(config);  
 }
@@ -69,16 +69,16 @@ function copyHtml() {
 
 // Preview
 
-function update() { 
-    const css = cmCss.getValue(); 
-    const html = cmHtml.getValue(); 
-    setPreview(css, html);
-    setLocalStorage(css, html);
+function updateCss() { 
+  const css = cmCss.getValue(); 
+  previewCss.innerHTML = css;
+  setLocalStorage('css', css);
 }
 
-function setPreview(cssCode, htmlCode) {
-  previewCss.innerHTML = cssCode;
-  setInnerHTML(previewHtml, htmlCode);
+function updateHtml() { 
+    const html = cmHtml.getValue(); 
+    setInnerHTML(previewHtml, html);
+    setLocalStorage('html', html);
 }
 
 // Render html & eval <script> (Welcome Xss attacks, but you're on commands ;) See an original xss punishment at https://fdossena.com/?p=xsspunish/i.md)
@@ -92,9 +92,8 @@ function setInnerHTML(element, html)
 
 // Storage
 
-var setLocalStorage = function (css, html) {        
-  localStorage.setItem("user-css", css);    
-  localStorage.setItem("user-html", html);    
+var setLocalStorage = function (target, data) {        
+  localStorage.setItem(`user-${target}`, data);    
 };
 
 function getLocalStorage(config) {
@@ -107,5 +106,5 @@ function getLocalStorage(config) {
     return (userCss ==null && userHtml == null);
 };
 
-export {cmHtml, cmCss , init}
+export {cmHtml, cmCss , setupEditors}
 

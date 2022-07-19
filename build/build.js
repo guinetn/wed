@@ -1,48 +1,70 @@
-const TEMPLATES_DIRNAME = 'templates';
-const TEMPLATES_OUTFILE = 'templates.js';
 const fs = require('fs');
-
 const path = require('path');
 
-const getFileList = (dirName) => {
+const CATEGORIES_FOLDER = 'categories';
+const CATEGORIES_FILENAME = 'categories.js';
+const CATEGORIES_OUTFILE = `${CATEGORIES_FOLDER}/${CATEGORIES_FILENAME}`;
 
-    let files = [];
-    const items = fs.readdirSync(dirName, { withFileTypes: true });
+/*
+Allow the application to know all the files under each category 
+Create categories/categories.js, an aggregation of all the 'templates/templates.json' files
+catgories: [
+
+    category (folder in /categories)
+    ↓
+  'html': [
+
+    category templates (categories/…cat…/templates.json files content)
+        ↓
+    { "name": "cards", "lang": "html", "files": "cards.html , cards.css" },
+    { "name": "progress", "lang": "html", "files": "progress.html , progress.css" }
+     …
+   ],
+   'css': …
+
+]
+*/
+const aggregateCategories = (folder) => {
+
+    let cats = [];
+    const items = fs.readdirSync(folder, { withFileTypes: true });
 
     for (const item of items) {
         if (item.isDirectory()) {
-            files = [...files, ...getFileList(`${dirName}/${item.name}`)];
+            cats = [...cats, ...aggregateCategories(`${folder}/${item.name}`)];
         } else {
 
+            // Aggregate all templates.json cats    
             if (path.extname(item.name) == '.json') {
-                const jsonFile = `${dirName}/${item.name}`;
+                const jsonFile = `${folder}/${item.name}`;
                 const rawdata = fs.readFileSync(jsonFile, 'utf8');
-                // const data = JSON.parse(rawdata);
-                files.push(`'${path.basename(path.dirname(jsonFile))}': ${rawdata}`);
+
+                cats.push(`'${path.basename(path.dirname(jsonFile))}': ${rawdata}`);
             }
         }
     }
 
-    return files;
+    return cats;
 };
 
-const files =getFileList(TEMPLATES_DIRNAME);
-let templates_list = `/* Templates content 
-name      Template description. For display/filter purpose
-lang      Type of the template: js, css, html. For display/filter purpose
-files     Template content are in .html and/or .css files comma separated
-          A SERVER IS NEEDED
-          Ignored if content is set
-content   Raw template content
-          NO SERVER is needed
+const categories_data = aggregateCategories(CATEGORIES_FOLDER);
+let categories = `/* Categories have templates 
+templates json object: 
+    name      Template description. For display/filter purpose
+    lang      Type of the template: js, css, html. For display/filter purpose
+    files     Template content are in .html and/or .css files comma separated. Ignored if content is set
+    content   Raw template content.It set, it will overrides files 
 */
 
-export const templates = { 
+export const categories = { 
 
-${files.join(',')}
+${categories_data.join(',')}
 }`;
- let templatesOutFile = `${TEMPLATES_DIRNAME}/${TEMPLATES_OUTFILE}`;
-fs.writeFile(templatesOutFile, templates_list, (err) => {
-    if (err) throw err;
-    console.log(`  --> ${templatesOutFile} created`);
+
+fs.writeFile(CATEGORIES_OUTFILE, categories, (err) => {
+    if (err) {
+        console.error(`  --> ${CATEGORIES_OUTFILE} created`);
+        throw err;
+    }
+    console.log(`  --> ${CATEGORIES_OUTFILE} created`);
 });
