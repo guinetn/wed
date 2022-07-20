@@ -19,32 +19,32 @@ Just deploy the folder on an http server
 
 ### Running locally: install a local server
 
-* Using 'Serve' npm package 
->npm i -g serve
->cd […project_path…]  
->serve 
+* Using [**serve**](https://www.npmjs.com/package/serve) npm package
+>npm i -g serve  
+cd […project_path…]  
+serve 
 
-* Using 'LiveServer' VSCode Extension  
-Install [LiveServer, a VSCode extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)  
->Open the project's folder in VSCode
->Open index.html
->Click on VSCode status bar "Go live" or right-click on index.html → Open with LiveServer
+* Using [**LiveServer**](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VSCode Extension  
+>Open the project's folder in VSCode  
+Open index.html  
+Click on VSCode status bar "Go live" (right-click on index.html → Open with LiveServer)
 
 ## Create your own template
 
 Templates are html+css files stored under /categories  
 1. Add files (html, css, javascript) in a category 
-2. Declare them inside the category's templates.json, ie: { "name": "details & summary", "lang": "html", "files": "details_summary.html" },
-    name      Template description. For display/filter purpose
-    lang      Type of the template: js, css, html. For display/filter purpose
-    files     Template content are in .html and/or .css files comma separated. Ignored if content is set
-    content   Raw template content (no files sided to it). If set, it will overrides files 
-3. run `npm run build` to generate categories/categories.js, a file used to display categories and their associated templates
+2. Declare them inside the category's templates.json, ie: { "name": "details & summary", "lang": "html", "files": "details_summary.html" },  
+    **name**      Template description. For display/filter purpose  
+    **lang**      Type of the template: js, css, html. For display/filter purpose  
+    **files**     Template content are in .html and/or .css files comma separated. Ignored if content is set  
+    **content**   Raw template content (no files sided to it). If set, it will overrides files   
+3. **`npm run build`** to generate categories/categories.js, a file used to display categories and their associated templates
 
 ## Tech stack
 
-* npm + node
-* VSCode + Extensions: LiveServer
+* Npm + NodeJS 16.15.1
+* NPM package [serve](https://www.npmjs.com/package/serve)
+* VSCode + Extensions: [LiveServer](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 * [CodeMirror V5.65.6](https://codemirror.net/)
 * FlexBox Layout
 
