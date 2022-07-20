@@ -8,7 +8,7 @@ const CATEGORIES_OUTFILE = `${CATEGORIES_FOLDER}/${CATEGORIES_FILENAME}`;
 /*
 Allow the application to know all the files under each category 
 Create categories/categories.js, an aggregation of all the 'templates/templates.json' files
-catgories: [
+categories: [
 
     category (folder in /categories)
     ↓
