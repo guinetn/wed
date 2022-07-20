@@ -88,11 +88,11 @@ function filteringTemplates(event) {
 
   Array.prototype.map.call(div_templates, div => {
  
-    // All list item are checked to see if the value of the input, ignoring case, matches the inner text or inner html of the item.
-    let div_text = div.textContent || div.innerText;
+    // All item (template name) are compared (case insensitive) with the search input
+    let template_name = (div.textContent || div.innerText).toUpperCase();
 
     // Displays list items that are a match, and nothing if no match
-    div.style.display = (div_text.toUpperCase().indexOf(search_term) > -1) ? "" : "none";
+    div.style.display = (template_name.indexOf(search_term) <= -1) ? "none" : "";
   });
 }
 
