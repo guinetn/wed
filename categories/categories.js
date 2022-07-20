@@ -3,7 +3,7 @@ templates json object:
     name      Template description. For display/filter purpose
     lang      Type of the template: js, css, html. For display/filter purpose
     files     Template content are in .html and/or .css files comma separated. Ignored if content is set
-    content   Raw template content.If set, it will overrides files 
+    content   Raw template content (no files sided to it). If set, it will overrides files 
 */
 
 export const categories = { 
