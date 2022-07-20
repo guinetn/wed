@@ -1,4 +1,4 @@
-import * as CATEGORIES_LIB from "./categories/categories_lib.js"; 
+import * as CATEGORIES_LIB from "./categories/categories.js"; 
 import {config} from "./config/config.js";
 import * as EDITOR_LIB from "./editor/editor.js";
 import * as CONSOLE_LIB from "./console/console.js";
@@ -17,20 +17,21 @@ window.addEventListener('load', setup_application);
 
 // - - - - - - - - - - SETUP - - - - - - - - - -
 
-function setup_application() {
+async function setup_application() {
   
   CONSOLE_LIB.setup_console_Hook(CONSOLE_UI_ELEMENT, CONSOLE_CLEAR_UI_BUTTON);
 
   CATEGORIES_LIB.showCategories(CATEGORIES_UI_BUTTONS);
   CATEGORIES_LIB.showTemplates(CATEGORY_UI_TEMPLATES);
   
-  if (EDITOR_LIB.setupEditors()) {
-    getTemplate( CATEGORIES_LIB.templates[DEFAULT_CATEGORY].files);
-  }
+  await config.setup(CONFIG_FILE, showConfig);
 
   start_listeners();
 
-  config.setup(CONFIG_FILE, showConfig);
+  if (EDITOR_LIB.setupEditors()) {
+   // 'default' template is the default view 
+   CATEGORY_UI_TEMPLATES.firstChild.click(); 
+  }
 }
 
 // - - - - - - - - - - LISTEN - - - - - - - - - -
@@ -41,10 +42,12 @@ function start_listeners() {
   CATEGORY_UI_TEMPLATES.addEventListener("click", templateSelected);
 
   // Listen for user searching a template
-  SEARCH_UI_ELEMENT.addEventListener("keyup", CATEGORIES_LIB.filterTemplates);  // Key pressed
+  SEARCH_UI_ELEMENT.addEventListener("keyup", filteringTemplates);  
 }
 
-// PROCESS EVENTS: category or template have been clicked
+// PROCESS EVENTS: category clicked - template clicked - search input change
+
+
 
 function categorySelected(event) {
   if (! event.target.matches("button")) 
@@ -63,7 +66,7 @@ function templateSelected(event) {
 
     CONSOLE_CLEAR_UI_BUTTON.click();
 
-    //                  Template  'default': [ … { "name": "default  [html]", "lang": "html", "files": "default.html , default.css" }, … ] Have been formatted to  
+    //                 Template  'default': [ … { "name": "default  [html]", "lang": "html", "files": "default.html , default.css" }, … ] Have been formatted to  
     //  event.srcElement format   <div data-lang="html" data-category="default" data-files="default.html , default.css">default  [html]</div>
     const content = event.srcElement.getAttribute("data-content");          
     if (content != null) {
@@ -73,12 +76,27 @@ function templateSelected(event) {
 
     const files = event.srcElement.getAttribute("data-files");   
     const category = event.srcElement.getAttribute("data-category");   
-    CATEGORIES_LIB.getTemplate(`${config.categoriesDirectory}/${category}`, files, renderTemplate);          
+    CATEGORIES_LIB.getTemplate(`${config.categories_directory}/${category}`, files, renderTemplate);          
 }
 
 // - - - - - - - - - - UI RENDERING - - - - - - - - - -
 
-function showConfig(x) {
+function filteringTemplates(event) {
+  
+  let search_term = this.value.toUpperCase();  
+  let div_templates = CATEGORY_UI_TEMPLATES.getElementsByTagName("div");
+
+  Array.prototype.map.call(div_templates, div => {
+ 
+    // All list item are checked to see if the value of the input, ignoring case, matches the inner text or inner html of the item.
+    let div_text = div.textContent || div.innerText;
+
+    // Displays list items that are a match, and nothing if no match
+    div.style.display = (div_text.toUpperCase().indexOf(search_term) > -1) ? "" : "none";
+  });
+}
+
+function showConfig() {
 
   // Show app version: current version, [online available version]
   VERSION_UI_ELEMENT.innerText = config.version.current;

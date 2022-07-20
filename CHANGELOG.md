@@ -27,7 +27,7 @@ Good to have: commit or PR links.
 
 ### Changed
 
-- Code refactoring (config, version check)
+- Code refactoring (config, version check, search)
 - add ./config.json to setup version and har coded data
 
 ## v0.3.0
