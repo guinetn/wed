@@ -16,6 +16,7 @@ export async function httpGetJson(url) {
 
 export async function fetchFile(file, callback) {    
   await fetch(file)
+   .then((res) => res.text())
     .then((res) => callback(res))
     .catch(function (err) {
       console.error(`fetchFile: Something went wrong with '${file}: ${err}`);
