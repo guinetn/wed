@@ -23,7 +23,14 @@ Good to have: commit or PR links.
 -->
 
 
-## v3.0.0
+## v0.4.0
+
+### Changed
+
+- Code refactoring (config, version check)
+- add ./config.json to setup version and har coded data
+
+## v0.3.0
 
 ### Changed
 

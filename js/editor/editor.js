@@ -15,12 +15,13 @@ document.querySelector('#copyHtml').addEventListener('click', copyHtml);
 document.querySelector('#copyCss').addEventListener('click', copyCss);
 
 // return true if localstorage has no data and need to be set at default template
-function setupEditors(config) {
+function setupEditors() {
   
   cmHtml = new CodeMirror.fromTextArea(document.getElementById("textareaHtml"),
     {
       lineNumbers: true,
-      mode: "javascript",
+      mode: "text/html",
+          extraKeys: {"Ctrl-Space": "autocomplete"},
       theme: "monokai",
       lineWrapping: true,
       keyMap: "sublime"
@@ -30,6 +31,7 @@ function setupEditors(config) {
   cmCss = new CodeMirror.fromTextArea(document.getElementById("textareaCss"), {
     lineNumbers: true,
     mode: "css",
+      extraKeys: {"Ctrl-Space": "autocomplete"},
     theme: "monokai",
     lineWrapping: true,
     keyMap: "sublime"
@@ -38,10 +40,10 @@ function setupEditors(config) {
   // cmHtml.setSize("100%", "100%");
   // cmCss.setSize("100%", "100%");
 
-  cmHtml.on("changes", () => updateHtml());
-  cmCss.on("changes", () => updateCss());
+  cmHtml.on("changes", (editor) => update(editor));
+  cmCss.on("changes", (editor) => update(editor));
 
-  return getLocalStorage(config);  
+  return restoreEditorsWithLocalStorage();  
 }
 
 // Commands
@@ -69,36 +71,41 @@ function copyHtml() {
 
 // Preview
 
-function updateCss() { 
-  const css = cmCss.getValue(); 
-  previewCss.innerHTML = css;
-  setLocalStorage('css', css);
+function update(editor) { 
+  const editorMode = editor.doc.mode.name;
+  const updatedCode = editor.doc.getValue(); 
+
+  switch(editorMode) {
+
+    case 'css':
+      previewCss.innerHTML = updatedCode;
+      break;
+
+    case 'htmlmixed': 
+      previewHtml.innerHTML = updatedCode;
+      runJSScripts(previewHtml);
+  }
+  
+  saveEditoToLocalStorage(editorMode, updatedCode);  
 }
 
-function updateHtml() { 
-    const html = cmHtml.getValue(); 
-    setInnerHTML(previewHtml, html);
-    setLocalStorage('html', html);
-}
-
-// Render html & eval <script> (Welcome Xss attacks, but you're on commands ;) See an original xss punishment at https://fdossena.com/?p=xsspunish/i.md)
-function setInnerHTML(element, html)  
+// Eval <script> (Welcome Xss attacks, but you're on commands ;) See an original xss punishment at https://fdossena.com/?p=xsspunish/i.md)
+function runJSScripts(element)  
 {          
-    element.innerHTML = html;  
-    var codes = element.getElementsByTagName("script");   
-    for(var i=0;i<codes.length;i++)          
-        eval(codes[i].text);          
+  var codes = element.getElementsByTagName("script");   
+  for(var i=0;i<codes.length;i++)          
+      eval(codes[i].text);          
 }  
 
 // Storage
 
-var setLocalStorage = function (target, data) {        
-  localStorage.setItem(`user-${target}`, data);    
+var saveEditoToLocalStorage = function (editorMode, data) {        
+  localStorage.setItem(`user-${editorMode}`, data);    
 };
 
-function getLocalStorage(config) {
+function restoreEditorsWithLocalStorage() {
   var userCss = localStorage.getItem("user-css");            
-  var userHtml = localStorage.getItem("user-html");            
+  var userHtml = localStorage.getItem("user-htmlmixed");            
   setEditors(
     userCss != null ? userCss : "unset",    
     userHtml != null ? userHtml : "unset");    

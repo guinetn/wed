@@ -1,25 +1,22 @@
-import {version_config} from "./version_config.js";
-import {httpGet} from "../utilities/utilities.js";
+import {fetchFile} from "../utilities/utilities.js";
 
 let version = {
-    config: version_config,
-    
-    update_ui: null,
+    current:null,
+    latest: null,
 
-    is_new_version_available: function() {
-      return version.config.latest != version.config.current;
+    is_dnew_version_available: function() {
+      return this.latest != this.current;
     },
 
-    get_latest_version_available: function(ui_callback) {
-      this.update_ui = ui_callback;
-      httpGet(this.config.version_check_path, this.parse_online_version, console.err);
+    // Will check the url './config.json'
+    get_latest: async function(json_config_url) {
+      await fetchFile(json_config_url, this.extractLatestVersion);
     },
 
-    parse_online_version : function(online_data_version) {
-        // Parse js/version/version_config.js    'export const version = "0.1.0";'
-        const latestFound = /(?:current ?= ?")(?<version>(\d+\.*){3})(?:")/u.exec(online_data_version).groups.version;
-        version.config.latest  = latestFound;
-        version.update_ui();
+    extractLatestVersion : function(online_data_version) {
+        // Parse config.json   ' "current": "1.1.0",  '
+        const latestFound = /(?:["']current["'] ?: ?["'])(?<version>(\d+\.*){3})(?:")/u.exec(online_data_version).groups.version;
+        version = {...version, 'latest': latestFound};
     }     
 }
 
