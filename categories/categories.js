@@ -28,7 +28,8 @@ export const categories = {
     { "name": "event-delegation", "lang": "js", "files": "event-delegation.html , event-delegation.css" }
 ]
 ,'layout': [
-    { "name": "bootstrap 5.1.3", "lang": "css", "files": "bootstrap-513.html , bootstrap-513.css" }
+    { "name": "bootstrap 5.1.3", "lang": "css", "files": "bootstrap-513.html , bootstrap-513.css" },
+    { "name": "email app layout", "lang": "css", "files": "email-app-layout.html , email-app-layout.css" }
 ]
 
 ,'react': [
